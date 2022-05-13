@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-// import ProductsServices from '../services/products.services';
 
 export const checkName = (req: Request, res: Response, next: NextFunction) => {
   const { name } = req.body;
@@ -19,4 +18,20 @@ export const checkName = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
-export default checkName;
+export const checkAmount = (req: Request, res: Response, next: NextFunction) => {
+  const { amount } = req.body;
+
+  if (amount === undefined) {
+    return res.status(400).json({ message: '"amount" is required' });
+  }
+
+  if (typeof amount !== 'string') {
+    return res.status(422).json({ message: '"amount" must be a string' });
+  }
+
+  if (amount.length < 3) {
+    return res.status(422).json({ message: '"amount" length must be at least 3 characters long' });
+  }
+
+  next();
+};
