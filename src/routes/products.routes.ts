@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import getAll from '../architecture/controllers/products.controllers';
+import getAll from '../controllers/products.controllers';
 
 const routes = Router();
 
