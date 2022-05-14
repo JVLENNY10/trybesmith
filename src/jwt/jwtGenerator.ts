@@ -1,7 +1,5 @@
-import dotenv from 'dotenv';
 import { sign, Secret } from 'jsonwebtoken';
 
-dotenv.config();
 const jwtConfig = { expiresIn: '1d' };
 
 const jwtGenerator = (payload = {}): Secret => (
