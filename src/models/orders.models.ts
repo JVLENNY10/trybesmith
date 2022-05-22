@@ -10,8 +10,8 @@ class OrdersModels {
     this.connection = connection;
   }
 
-  public getAll = async (): Promise<IOrders[]> => {
-    const [orders] = await this.connection.execute('SELECT * FROM Trybesmith.Orders');
+  private getAll = async (): Promise<IOrders[]> => {
+    const [orders] = await this.connection.execute('SELECT * FROM Trybesmith.Orders;');
     return orders as IOrders[];
   };
 }
