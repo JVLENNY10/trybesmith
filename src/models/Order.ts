@@ -1,9 +1,9 @@
 import { Pool } from 'mysql2/promise';
 
 import connection from './connection';
-import IOrders from '../interfaces/orders.interface';
+import IOrders from '../interfaces/ordersInterface';
 
-class OrdersModels {
+class Order {
   private connection: Pool;
 
   constructor() {
@@ -16,4 +16,4 @@ class OrdersModels {
   };
 }
 
-export default OrdersModels;
+export default Order;
