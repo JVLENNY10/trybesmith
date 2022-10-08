@@ -1,7 +1,7 @@
 import express from 'express';
-import usersRoutes from './routes/users.routes';
-import ordersRoutes from './routes/orders.routes';
-import productsRoutes from './routes/products.routes';
+import usersRoutes from './routes/usersRoutes';
+import ordersRoutes from './routes/ordersRoutes';
+import productsRoutes from './routes/productsRoutes';
 
 const app = express();
 
