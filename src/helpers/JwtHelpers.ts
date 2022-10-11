@@ -1,8 +1,5 @@
 import fs = require('fs');
-import dotenv from 'dotenv';
-import { Secret, sign } from 'jsonwebtoken';
-
-dotenv.config();
+import { JwtPayload, Secret, sign, verify } from 'jsonwebtoken';
 
 class JwtHelpers {
   private config: object;
@@ -13,6 +10,8 @@ class JwtHelpers {
     this.config = { expiresIn: '1d' };
     this.jwtSecret = fs.readFileSync('jwt.key', 'utf-8');
   }
+
+  public decoder = (token: string): string | JwtPayload => verify(token, this.jwtSecret);
 
   public encoder = (payload = {}): Secret => sign({ data: payload }, this.jwtSecret, this.config);
 }
