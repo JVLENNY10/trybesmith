@@ -1,6 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
 
+import UsersService from '../services/UsersService';
+
 class UsersMiddlewares {
+  private usersService: UsersService;
+
+  constructor() {
+    this.usersService = new UsersService();
+  }
+
   public checkClasse = (req: Request, res: Response, next: NextFunction) => {
     const { classe } = req.body;
 
@@ -39,6 +47,17 @@ class UsersMiddlewares {
     next();
   };
 
+  public checkLogin = async (req: Request, res: Response, next: NextFunction) => {
+    const infos = req.body;
+    const userLogin = await this.usersService.login(infos);
+
+    if (userLogin === undefined) {
+      return res.status(401).json({ message: 'Username or password invalid' });
+    }
+
+    next();
+  };
+
   public checkPassword = (req: Request, res: Response, next: NextFunction) => {
     const { password } = req.body;
 
@@ -59,7 +78,7 @@ class UsersMiddlewares {
     next();
   };
 
-  public checkUserName = (req: Request, res: Response, next: NextFunction) => {
+  public checkUsername = (req: Request, res: Response, next: NextFunction) => {
     const { username } = req.body;
 
     if (username === undefined) {
