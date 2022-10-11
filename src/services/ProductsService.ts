@@ -9,8 +9,8 @@ class ProductsService {
   }
 
   public create = async (infos: IProducts): Promise<IProducts> => {
-    const id = await this.productModel.create(infos);
-    return { id, ...infos };
+    const newProduct = await this.productModel.create(infos);
+    return newProduct;
   };
 
   public getAll = async (): Promise<IProducts[]> => {
