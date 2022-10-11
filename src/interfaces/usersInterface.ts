@@ -4,6 +4,13 @@ interface ILogin {
   password: string,
 }
 
+interface IToken {
+  data: {
+    id: number,
+    username: string,
+  }
+}
+
 interface IUsers {
   id?: number,
   username: string,
@@ -12,4 +19,4 @@ interface IUsers {
   password: string,
 }
 
-export { ILogin, IUsers };
+export { ILogin, IToken, IUsers };
