@@ -1,5 +1,5 @@
 import User from '../models/User';
-import IUsers from '../interfaces/usersInterface';
+import { ILogin, IUsers } from '../interfaces/usersInterface';
 
 class UsersService {
   private userModel: User;
@@ -9,8 +9,13 @@ class UsersService {
   }
 
   public create = async (infos: IUsers): Promise<IUsers> => {
-    const id = await this.userModel.create(infos);
-    return { id, ...infos };
+    const newUser = await this.userModel.create(infos);
+    return newUser;
+  };
+
+  public login = async (infos: ILogin): Promise<ILogin> => {
+    const [userLogin] = await this.userModel.login(infos);
+    return userLogin;
   };
 }
 
