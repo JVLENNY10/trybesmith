@@ -1,3 +1,9 @@
+interface ILogin {
+  id?: number,
+  username: string,
+  password: string,
+}
+
 interface IUsers {
   id?: number,
   username: string,
@@ -6,4 +12,4 @@ interface IUsers {
   password: string,
 }
 
-export default IUsers;
+export { ILogin, IUsers };
