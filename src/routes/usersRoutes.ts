@@ -6,9 +6,10 @@ const routes = Router();
 const usersController = new UsersController();
 const usersMiddlewares = new UsersMiddlewares();
 
-const { create } = usersController;
-const { checkUserName, checkClasse, checkLevel, checkPassword } = usersMiddlewares;
+const { create, login } = usersController;
+const { checkClasse, checkLevel, checkLogin, checkPassword, checkUsername } = usersMiddlewares;
 
-routes.post('/users', checkUserName, checkClasse, checkLevel, checkPassword, create);
+routes.post('/login', checkPassword, checkUsername, checkLogin, login);
+routes.post('/users', checkClasse, checkLevel, checkPassword, checkUsername, create);
 
 export default routes;
