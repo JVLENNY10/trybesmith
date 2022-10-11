@@ -10,14 +10,14 @@ class Product {
     this.connection = connection;
   }
 
-  public create = async (infos: IProducts): Promise<number> => {
+  public create = async (infos: IProducts): Promise<IProducts> => {
     const { name, amount } = infos;
 
-    const [{ insertId }] = await this.connection.execute<ResultSetHeader>(`
+    const [{ insertId: id }] = await this.connection.execute<ResultSetHeader>(`
       INSERT INTO Trybesmith.Products (name, amount) VALUES (?, ?);
     `, [name, amount]);
 
-    return insertId;
+    return { id, ...infos };
   };
 
   public getAll = async (): Promise<IProducts[]> => {
