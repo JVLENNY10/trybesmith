@@ -1,11 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
 
+import JwtHelpers from '../helpers/JwtHelpers';
 import UsersService from '../services/UsersService';
+import { IToken } from '../interfaces/usersInterface';
 
 class UsersMiddlewares {
-  private usersService: UsersService;
+  private jwtHelpers: JwtHelpers;
 
+  private usersService: UsersService;
+  
   constructor() {
+    this.jwtHelpers = new JwtHelpers();
     this.usersService = new UsersService();
   }
 
@@ -77,6 +82,23 @@ class UsersMiddlewares {
 
     next();
   };
+
+  public checkToken = (
+    async (req: Request, res: Response, next: NextFunction): Promise<Response | undefined> => {
+      const token = req.headers.authorization;
+
+      if (token === undefined) {
+        return res.status(401).json({ message: 'Token not found' });
+      }
+
+      try {
+        this.jwtHelpers.decoder(token) as IToken;
+        next();
+      } catch (error) {
+        return res.status(401).json({ message: 'Invalid token' });
+      }
+    }
+  );
 
   public checkUsername = (req: Request, res: Response, next: NextFunction) => {
     const { username } = req.body;
