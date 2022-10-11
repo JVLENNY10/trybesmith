@@ -19,6 +19,14 @@ class UsersController {
 
     return res.status(201).json({ token });
   };
+
+  public login = async (req: Request, res: Response): Promise<Response> => {
+    const infos = req.body;
+    const { id, username } = await this.usersService.login(infos);
+    const token = this.jwtHelpers.encoder({ id, username });
+
+    return res.status(200).json({ token });
+  };
 }
 
 export default UsersController;
